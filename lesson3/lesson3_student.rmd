@@ -305,7 +305,9 @@ Response: Women have initiated more friendships. Plotting the boxplot graph we c
 Notes:
 
 ```{r Getting Logical}
-
+pf$mobile_check_in <- ifelse(pf$mobile_likes > 0,1,0)
+pf$mobile_check_in <- factor(pf$mobile_check_in)
+nrow(pf[pf$mobile_check_in == 1,])/nrow(pf)
 ```
 
 Response:
