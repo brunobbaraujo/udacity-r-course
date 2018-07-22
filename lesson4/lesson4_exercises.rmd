@@ -1,0 +1,50 @@
+Lesson 4
+========================================================
+
+***
+
+### 1 e 2. Price vs x
+
+```{r}
+setwd("~/R/udacity scripts/lesson4")
+library(ggplot2)
+data("diamonds")
+str(diamonds)
+
+ggplot(aes(x=x,y=price),data=diamonds) +
+  geom_point(alpha=1/40,position = position_jitter(h=0.1)) +
+  xlim(3,quantile(diamonds$x,0.90)) +
+  ylim(0,quantile(diamonds$price,0.90))
+```
+
+***
+
+### 3. Correlations
+```{r}
+with(diamonds,cor.test(x = x, y = price, method = 'pearson'))
+with(diamonds,cor.test(x = y, y = price, method = 'pearson'))
+with(diamonds,cor.test(x = z, y = price, method = 'pearson'))
+```
+
+***
+
+### 4. price vs depth
+```{r}
+ggplot(aes(x=depth,y=price),data=diamonds) +
+  geom_point(alpha=1/100) +
+  scale_x_continuous(breaks=seq(40,80,2))
+```
+
+***
+
+### 7. Correlation price vs depth
+```{r}
+with(diamonds,cor.test(x = depth, y = price, method = 'pearson'))
+```
+
+***
+
+
+
+
+
