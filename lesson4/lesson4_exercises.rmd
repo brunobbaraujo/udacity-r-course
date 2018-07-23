@@ -44,7 +44,24 @@ with(diamonds,cor.test(x = depth, y = price, method = 'pearson'))
 
 ***
 
+### 8. price vs carat omit top 1%
+```{r, fig.width= 12, fig.height= 6}
+ggplot(aes(x=carat,y=price),data=diamonds) +
+  geom_point(alpha=1/40,position = 'jitter') +
+  xlim(0,quantile(diamonds$carat,0.99)) +
+  ylim(0,quantile(diamonds$price,0.99))
+```
 
+***
 
+### 9. scatterplot price x volume
+```{r, fig.width= 12, fig.height= 6}
+diamonds$volume <- diamonds$x * diamonds$y * diamonds$z
+
+ggplot(aes(x=volume,y=price),data=diamonds) +
+  geom_point()
+```
+
+***
 
 
