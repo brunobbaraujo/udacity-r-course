@@ -64,4 +64,31 @@ ggplot(aes(x=volume,y=price),data=diamonds) +
 
 ***
 
+### 11. Correlation price x volume
+```{r, fig.width= 12, fig.height= 6}
+with(subset(diamonds, volume != 0 & volume < 800),cor.test(price,volume))
+```
+
+***
+
+### 12. Adjusts to scatterplot price x volume
+```{r, fig.width= 8, fig.height= 4}
+ggplot(aes(x=volume,y=price),data=subset(diamonds, volume != 0 & volume < 800)) +
+  geom_point(alpha=1/40) +
+  geom_smooth(method="lm", se = FALSE)
+```
+
+***
+
+### 13. Diamonds by Clarity 
+```{r}
+library(dplyr)
+diamondsByClarity <- diamonds %>% 
+  group_by(clarity) %>%
+  summarise(mean_price = mean(price),
+            median_price = median(price),
+            min_price = min(price),
+            max_price = max(price),
+            n = n())
+```
 
