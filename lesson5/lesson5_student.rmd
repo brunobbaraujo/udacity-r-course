@@ -130,7 +130,10 @@ ggplot(aes(x = age, y = friend_count),
 Notes:
 
 ```{r Friending Rate}
+pf_fr <- subset(pf,tenure>0)
+pf_fr$f_rate <- pf_fr$friend_count/pf_fr$tenure
 
+summary(pf_fr$f_rate)
 ```
 
 ***
@@ -143,7 +146,12 @@ What is the median friend rate?
 What is the maximum friend rate?
 
 ```{r Friendships Initiated}
+ggplot(aes(x = tenure, y = f_rate),data = pf_fr) +
+  geom_line(aes(color = year_joined.bucket),stat='summary',fun.y=mean)4
 
+ggplot(aes(x = tenure, y = friendships_initiated / tenure),
+       data = subset(pf, tenure > 0)) +
+  geom_smooth(aes(color = year_joined.bucket))
 ```
 
 ***
