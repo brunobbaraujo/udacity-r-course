@@ -230,7 +230,10 @@ yo <- transform(yo, all.purchases = strawberry + blueberry + pina.colada + plain
 Notes:
 
 ```{r Prices over Time}
-
+ggplot(aes(x = 60*round(time/60), y = price), data = yo) +
+  geom_point(alpha=1/30,position = position_jitter(h=0.1), color = 'orange') +
+  geom_line(stat = 'summary', fun.y = mean, linetype = 2) +
+  ylim(30,70)
 ```
 
 ***
