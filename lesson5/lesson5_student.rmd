@@ -62,7 +62,6 @@ Notes:
 Notes:
 
 ```{r}
-install.packages('reshape2')
 library(reshape2)
 
 pf.fc_by_age_gender.wide <- dcast(pf.fc_by_age_gender,
@@ -245,6 +244,18 @@ Notes:
 
 ### Looking at Samples of Households
 
+```{r, fig.width=8, fig.height=6}
+set.seed(4230)
+sample.ids <- sample(levels(yo$id),16)
+
+ggplot(aes(x = time, y = price),
+       data = subset(yo, id %in% sample.ids)) +
+      facet_wrap(~id) +
+      geom_line() +
+      geom_point(aes(size = all.purchases), pch = 1))
+```
+
+
 ```{r Looking at Sample of Households}
 
 ```
@@ -263,7 +274,17 @@ Notes:
 
 ### Scatterplot Matrix
 Notes:
+```{r, fig.width= 12, fig.height= 12}
+#install.packages("GGally")
+library(GGally)
+theme_set(theme_minimal(20))
 
+# set the seed for reproducible results
+set.seed(1836)
+pf_subset <- pf[,c(2:15)]
+names(pf_subset)
+ggpairs(pf_subset[sample.int(nrow(pf_subset),1000),])
+```
 ***
 
 ### Even More Variables
