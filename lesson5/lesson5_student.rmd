@@ -258,6 +258,11 @@ ggplot(aes(x = time, y = price),
 
 ```{r Looking at Sample of Households}
 
+ggplot(aes(x = time, y = price), 
+  data = subset(yo,yo$id %in% sample.ids)) +
+  facet_wrap( ~id ) +
+  geom_line() +
+  geom_point(aes(size=all.purchases), pch = 1)  
 ```
 
 ***
