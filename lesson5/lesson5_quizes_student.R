@@ -39,8 +39,28 @@ ggplot(aes(x = volume, y = price), data = pf) +
 # friendships initiated ('prop_initiated') vs.
 # tenure and color the line segment by
 # year_joined.bucket.
+pf <- read.csv("~/R/udacity scripts/lesson5/pseudo_facebook.tsv",sep="\t")
+pf <- subset(pf, friend_count > 0)
 pf$year_joined <- floor(2014 - pf$tenure/365)
 pf$year_joined.bucket <- cut(pf$year_joined, breaks = c(2004,2009, 2011, 2012,2014), right = TRUE)
+pf$prop_initiated = with(pf, as.double(friendships_initiated/friend_count))
+
+ggplot(aes(x = tenure, y = prop_initiated), data = pf) +
+  geom_smooth(aes(color = year_joined.bucket))
+
+mean(subset(pf,year_joined.bucket == "(2012,2014]")$prop_initiated)
   
+# 6. Create a scatter plot of the price/carat ratio
+# of diamonds. The variable x should be
+# assigned to cut. The points should be colored
+# by diamond color, and the plot should be
+# faceted by clarity.
+
+ggplot(aes(x = cut, y = price/carat), data = pf) +
+  geom_point(alpha = 1/3, aes(color = color),position = position_jitter(h=0.1)) +
+  scale_color_brewer(type = 'div') +
+  facet_wrap(~ clarity)
+  
+
 
   
